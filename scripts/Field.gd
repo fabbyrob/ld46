@@ -18,6 +18,8 @@ func _ready():
 #func _process(delta):
 #	pass
 
+#should return true if seed was sucessfully planted
+#false otherwise
 func plant(attributes):
 	#generate a new seed with mutated attributes
 	var new_seed = SeedPrefab.instance()
@@ -28,5 +30,6 @@ func plant(attributes):
 	attr.mutate()
 	new_seed.position = InventoryPos
 	print(new_seed.get_node("PlantAttributes").mutation_rate)
+	return true
 	#move the seed to inventory
 	#makeseed(attributes.Type, attributes.mutation_rate, ....)

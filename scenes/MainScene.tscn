@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/art/farm_art/potato.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/farm_art/dirt.png" type="Texture" id=2]
@@ -11,24 +11,37 @@
 [ext_resource path="res://assets/art/farm_art/plus.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/farm_art/minus.png" type="Texture" id=10]
 [ext_resource path="res://scenes/InventoryManager.gd" type="Script" id=11]
+[ext_resource path="res://assets/art/farm_art/trash.png" type="Texture" id=12]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 88.1877
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 423.388, 430.95 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 18.732
+height = 8.83669
 
 [node name="MainScene" type="Node2D"]
 
 [node name="Seed2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 166.173, 208.499 )
 
-[node name="monster" type="Sprite" parent="."]
+[node name="Monster" type="Sprite" parent="."]
 modulate = Color( 0.764706, 0.14902, 0.745098, 1 )
 position = Vector2( 820.087, 247.357 )
 texture = ExtResource( 1 )
 script = ExtResource( 7 )
 HPbar = NodePath("../GUI/Bar")
-TimerPath = NodePath("Timer")
+TimerPath = NodePath("../Monster/Timer")
 
-[node name="Timer" type="Timer" parent="monster"]
+[node name="Timer" type="Timer" parent="Monster"]
+
+[node name="Mouth" type="Area2D" parent="Monster"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/Mouth"]
+shape = SubResource( 3 )
 
 [node name="Field" type="Node2D" parent="."]
 position = Vector2( 193.376, 193.126 )
@@ -114,6 +127,7 @@ texture = ExtResource( 4 )
 
 [node name="Seed" parent="." instance=ExtResource( 5 )]
 position = Vector2( 158.004, 126.496 )
+scale = Vector2( 0.535, 1 )
 
 [node name="Inventory" type="Node2D" parent="."]
 position = Vector2( 29.7086, 30.3687 )
@@ -142,6 +156,20 @@ position = Vector2( 20, 500 )
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( 448.108, 460.397 )
-[connection signal="timeout" from="monster/Timer" to="monster" method="_on_Timer_timeout"]
-[connection signal="button_down" from="GUI/HBoxContainer/Button" to="monster" method="_on_Button_button_down"]
-[connection signal="button_down" from="GUI/HBoxContainer/Button2" to="monster" method="_on_Button2_button_down"]
+
+[node name="Trash" type="Area2D" parent="."]
+position = Vector2( 141.914, 536.199 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="trash" type="Sprite" parent="Trash"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash"]
+position = Vector2( -2.08768, -2.08768 )
+shape = SubResource( 2 )
+[connection signal="timeout" from="Monster/Timer" to="Monster" method="_on_Timer_timeout"]
+[connection signal="button_down" from="GUI/HBoxContainer/Button" to="Monster" method="_on_Button_button_down"]
+[connection signal="button_down" from="GUI/HBoxContainer/Button2" to="Monster" method="_on_Button2_button_down"]
