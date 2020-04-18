@@ -16,7 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="ld46"
+run/main_scene="res://scenes/MainScene.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Randomizer="*res://scripts/RNG.gd"
 
 [rendering]
 

@@ -13,4 +13,5 @@ export(int,0,100,5) var food_amount = 15
 export(float,0,30,0.5) var growth_time = 10
 
 func mutate():
-	pass
+	mutation_rate += Randomizer.sample()
+	print("post mutation %s" % mutation_rate)
