@@ -1,10 +1,17 @@
 extends Area2D
 
+#some signals
+signal DroppedField
+signal DroppedInventory
+signal DroppedMonster
+signal DroppedTrash
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 var dragMouse = false
-var oldPosition
+#var oldPosition
+var pickupSource
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,81 +21,71 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (dragMouse):
-		position = get_viewport().get_mouse_position()
+		get_parent().position = get_viewport().get_mouse_position()
 		
 	pass
-
 
 func click_drag_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton):
 		if(event.is_pressed()):#this will do all the mouse buttons right now
+			print("Pressed")
 			if (dragMouse == false):
 				dragMouse = true
-				oldPosition = position
+				#oldPosition = position
+				var areas = get_overlapping_areas()
+				pickupSource = null
+				for area in areas:
+					if (area is ItemSlot):
+						#this is our source
+						pickupSource = area
+						break
+				#TODO find out what itemslot we picked up from
 		else:
 			if (dragMouse == true):
 				var areas = get_overlapping_areas()
+				var foundNewArea = false
 				if (len(areas) > 0):
-					var foundNewArea = false
 					for area in areas:
 						var _parent = area.get_parent()
-						if("Field" in _parent.get_name()):#god i hate this
-							var attr = $PlantAttributes
-							var planted = _parent.get_node("FieldScript").plant(attr)
-							if (planted == true):
-								get_parent().remove_child(self)
-								self.queue_free()
-								foundNewArea = true
-							continue
-						elif ("Inv" in area.get_name()):#we're dropping on an inventory slot
-							#_parent.add_child(self)
-							#print(_parent.get_name())
-							#print(self.get_parent().get_name())
-							
-							#check if slot is already occupied, then swap what you are holding
-							var otherItems = getItems(areas)
-							if (len(otherItems) > 0):
-								print("Found a friend")
-								#assume its only 1 other item for now
-								var oItem = otherItems[0]
-								oItem.position = oldPosition
-									
-							self.StopDrag(area.position + _parent.position)
+						if(area is Field):
+							emit_signal("DroppedField", _parent)
 							foundNewArea = true
-							continue
+							break
+						elif (area is InventorySlot):#we're dropping on an inventory slot
+							emit_signal("DroppedInventory", area, pickupSource)
+							dragMouse = false
+							foundNewArea = true
+							break
 						elif ("Trash" in area.get_name()):#hit a trash can
-							get_parent().remove_child(self)
-							self.queue_free()
+							emit_signal("DroppedTrash")
 							foundNewArea = true
+							break
 						elif ("Mouth" in area.get_name()):#hit a mouth
 							#should check if i'm feedable
 							#feed the monster
 							var MonsterNode = area.get_parent()
-							MonsterNode.modifyHP(PlantAttributes.feed())
-							
-							#clean up this seed
-							get_parent().remove_child(self)
-							self.queue_free()
+							emit_signal("DroppedMonster", MonsterNode)
 							foundNewArea = true
 						else:
 							#this area isn't valid
 							pass
-					if (foundNewArea == false):
-						position = oldPosition
-				else:
-						#we aren't in a valid place to drop items
-						#go back home
-						position = oldPosition
+				if (foundNewArea == false):
+					#position = oldPosition
+					if (pickupSource):
+						get_parent().position = pickupSource.position + pickupSource.get_parent().position
+					pass
 			dragMouse = false
+
+func UpatePosition(pos):
+	position = pos
 
 func StopDrag(pos):
 	position = pos
 	dragMouse = false
 
-func getItems(areasList):
-	var items = []
+func getOtherItem(areasList):
 	for area in areasList:
 		if area.get_node("Item"):
-			items.append(area)
-	return items
+			return area
+	return null
 

@@ -1,12 +1,12 @@
 extends Node
 
+class_name Field
+
 #SIGNALS
 signal field_start_growing
 signal field_stop_growing
 
 #PREFABS
-var SeedPrefab = preload("res://scenes/Seed.tscn") 
-
 #EXPORTS
 export(bool) var plantable = true
 export (NodePath) var Inventory 
@@ -35,14 +35,14 @@ func plant(attributes : PlantAttributes):
 	
 	print(planted_attrs.mutation_rate)
 		
-	var new_seed = SeedPrefab.instance()
-	get_node(MainScene).add_child(new_seed)
-	var attr = new_seed.get_node("PlantAttributes")
-	attr.replace_by(attributes.duplicate())
-	attr = new_seed.get_node("PlantAttributes")
-	attr.mutate()
-	new_seed.position = InventoryNode.position
-	print(new_seed.get_node("PlantAttributes").mutation_rate)
+#	var new_seed = SeedPrefab.instance()
+#	get_node(MainScene).add_child(new_seed)#TODO this is dumb
+#	var attr = new_seed.get_node("PlantAttributes")
+#	attr.replace_by(attributes.duplicate())
+#	attr = new_seed.get_node("PlantAttributes")
+#	attr.mutate()
+#	new_seed.position = InventoryNode.position
+#	print(new_seed.get_node("PlantAttributes").mutation_rate)
 	return true
 	#move the seed to inventory
 	#makeseed(attributes.Type, attributes.mutation_rate, ....)

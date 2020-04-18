@@ -8,6 +8,8 @@ var CurrentHP
 var RangeNode
 var TimerNode
 
+signal Feed
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -34,7 +36,7 @@ func Death():
 	print("She's DEAD!")
 
 
-func modifyHP(val):
+func updateHP(val):
 	RangeNode.set_value(RangeNode.get_value()+val)
 	CurrentHP = RangeNode.get_value()
 	if (CurrentHP == 0):
@@ -44,18 +46,18 @@ func modifyHP(val):
 
 func _on_Button_button_down():
 	print(CurrentHP)
-	modifyHP(5)
+	updateHP(5)
 	pass # Replace with function body.
 
 
 func _on_Button2_button_down():
 	print(CurrentHP)
-	modifyHP(-5)
+	updateHP(-5)
 	pass # Replace with function body.
 
 #every timer tick decreases HP
 #then restarts the timer
 func _on_Timer_timeout():
-	modifyHP(HPdecay)
+	updateHP(HPdecay)
 	TimerNode.start(TimerTick)
 	pass # Replace with function body.

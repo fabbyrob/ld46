@@ -8,9 +8,38 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Field",
+"language": "GDScript",
+"path": "res://scripts/Field.gd"
+}, {
+"base": "ItemSlot",
+"class": "InventorySlot",
+"language": "GDScript",
+"path": "res://scripts/InvSlot.gd"
+}, {
+"base": "Node2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scripts/Item.gd"
+}, {
+"base": "Area2D",
+"class": "ItemSlot",
+"language": "GDScript",
+"path": "res://scripts/ItemSlot.gd"
+}, {
+"base": "Object",
+"class": "PlantAttributes",
+"language": "GDScript",
+"path": "res://scripts/PlantAttributes.gd"
+} ]
 _global_script_class_icons={
-
+"Field": "",
+"InventorySlot": "",
+"Item": "",
+"ItemSlot": "",
+"PlantAttributes": ""
 }
 
 [application]

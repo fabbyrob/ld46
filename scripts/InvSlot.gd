@@ -1,10 +1,13 @@
-extends Node2D
+extends ItemSlot
+
+class_name InventorySlot
+
+export var locked = false
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var InventorySize = 10
 
-var storage = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

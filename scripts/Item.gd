@@ -1,27 +1,15 @@
-extends Node
+extends Node2D
+class_name Item
 
 #i'm over engineering this, stop it me.
 enum ItemType {Seed, Mutator}
-var ItemList
+export (ItemType) var item_type 
 
-class InventoryItem:
-	var type
-	var name
-	
-	func _init(t, n):
-		type = t
-		name = n
+func feedSeed(Monster, Attributes):
+		Monster.updateHP(Attributes.food_amount)
 		
-	func applyItem():
-		pass
-		
-class SeedItem extends InventoryItem:
-	func applyItem():
-		print("Do seed stuff")
-		
-class MutatorItem extends InventoryItem:
-	func applyItem():
-		print("Do mutator stuff")
+func feedMutator(Monster):
+		Monster.updateHP(-5)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -31,14 +19,37 @@ class MutatorItem extends InventoryItem:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ItemList = []
-	ItemList.append(InventoryItem.new(ItemType.Seed, "Tomato Seed"))
-	ItemList.append(InventoryItem.new(ItemType.Mutator, "Mutator"))
+	#item_type = ItemType.Seed
 	pass # Replace with function body.
 
-func DroppedItem(item):
-	item.applyItem()
+func _on_DraggedThing_DroppedField(Field):
+	var attr = $PlantAttributes
+	var planted = Field.plant(attr)
+	if (planted == true):
+		get_parent().remove_child(self)
+		self.queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func _on_DraggedThing_DroppedInventory(Slot , OldSlot ):
+	var OtherItem = Slot.swap_item(self) #the inv slot is now aware of what owns what
+	if (OldSlot):
+		OldSlot.set_item(null)
+	if (OtherItem):
+		print("Found a friend")
+		#remove other item
+		OldSlot.set_item(OtherItem)
+		OtherItem.position = OldSlot.position + OldSlot.get_parent().position
+	position = Slot.position + Slot.get_parent().position
+
+
+func _on_DraggedThing_DroppedTrash():
+	#get_parent().remove_child(self)
+	self.queue_free()
+
+
+func _on_DraggedThing_DroppedMonster(Monster):
+	match(item_type):
+		ItemType.Seed: feedSeed(Monster, $PlantAttributes)
+		ItemType.Mutator: feedMutator(Monster)
+	self.queue_free()
+	pass # Replace with function body.

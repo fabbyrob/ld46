@@ -17,3 +17,4 @@ export(float,0,30,0.5) var growth_time = 10
 func mutate():
 	mutation_rate += Randomizer.sample()
 	print("post mutation %s" % mutation_rate)
+
