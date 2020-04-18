@@ -1,5 +1,7 @@
 extends Object
 
+class_name PlantAttributes
+
 #TYPES
 enum PlantType {Potato, Cucumber, Turnip}
 
