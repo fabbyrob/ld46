@@ -4,10 +4,14 @@ export (NodePath) var ResumeButton
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var SeedScene = load("res://scenes/Items/Seed.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var new_plant = SeedScene.instance()
+	$Field2.plant(new_plant.get_node("PlantAttributes"))
+	new_plant.queue_free()
+	$Inventory/InvSlot.set_item($StartingMutator)
 	pass # Replace with function body.
 
 
