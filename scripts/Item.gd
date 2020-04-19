@@ -43,8 +43,8 @@ func _on_DraggedThing_DroppedInventory(Slot, OldSlot):
 		print("Found a friend")
 		#remove other item
 		OldSlot.set_item(OtherItem)
-		OtherItem.position_in_slot(OldSlot)
-	position_in_slot(Slot)
+		#OtherItem.position_in_slot(OldSlot)
+	#position_in_slot(Slot)
 
 
 func _on_DraggedThing_DroppedTrash():

@@ -46,10 +46,11 @@ func _on_Timer_timeout():
 		#TODO create a plant item with these grown_attrs
 		var new_plant = SeedScene.instance()
 		new_plant.get_node("PlantAttributes").replace_by(grown_attrs)
+		#new_plant.update_self() # TODO
 		#TODO add plant item to scene in one of the field slots
-		var plot_sprite = get_node("plot%d" % [i+1])
+		var plot = get_node("plot%d" % [i+1]) as ItemSlot
 		get_tree().get_root().add_child(new_plant)
-		new_plant.position = plot_sprite.position
+		plot.set_item(new_plant)
 		
 	planted_attrs.queue_free()
 	planted_attrs = null
