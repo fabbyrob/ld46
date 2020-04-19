@@ -1,14 +1,14 @@
-extends Node
+extends Object
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
+var rng = RandomNumberGenerator.new()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	rng.randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,4 +16,4 @@ func _ready():
 #	pass
 
 func sample():
-	return 0.4#guaranteed random by fair die roll
+	return rng.randf()
