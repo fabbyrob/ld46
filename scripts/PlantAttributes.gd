@@ -18,7 +18,8 @@ export(float,0,30,0.5) var growth_time = 5
 
 export var color = Color(1,1,1)
 
-func mutate(mutation_modifier):
+func mutate(field_attrs):
+	var mutation_modifier = field_attrs.mutation_modifier
 	#mutation rate
 	if RNG.sample() < (mutation_rate*mutation_modifier):
 		mutation_rate = clamp(RNG.sample_normal(mutation_rate, 0.01), 0, 1.0)
