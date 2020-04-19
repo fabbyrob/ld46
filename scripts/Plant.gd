@@ -1,34 +1,21 @@
 extends Node2D
 class_name Plant
 
-var item_type = ItemManager.ItemType.Seed
 onready var originalScale = $Sprite.scale
+var item_type = ItemManager.ItemType.Mutator
 
-
-func feedSeed(Monster, Attributes):
-		Monster.updateHP(Attributes.food_amount)
-		
-func feedMutator(Monster):
-		Monster.updateHP(-5)
-		spawn(ItemManager.ItemType.Mutator, Monster)
+func feed(Monster):
+		Monster.updateHP($PlantAttributes.food_amount)
 		
 func _to_string():
-	match(item_type):
-		ItemManager.ItemType.Seed: return $PlantAttributes.make_tooltip()
-		ItemManager.ItemType.Mutator: return "Mutator thing string"
-	return ""
-	
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+	return $PlantAttributes.make_tooltip()
+		
 
 #updates UI stuff of sprite
 func update_self():
-	if($PlantAttributes):
-		get_node("Sprite").modulate = $PlantAttributes.color
-		var new_scale = Vector2($PlantAttributes.get_size(), $PlantAttributes.get_size())
-		$Sprite.scale = originalScale*new_scale
-		
+	get_node("Sprite").modulate = $PlantAttributes.color
+	var new_scale = Vector2($PlantAttributes.get_size(), $PlantAttributes.get_size())
+	$Sprite.scale = originalScale*new_scale
 	get_node("Control").set_tooltip(_to_string())
 		#mayeb scale should be an attribute
 	
@@ -38,14 +25,6 @@ func _ready():
 	#item_type = ItemType.Seed
 	update_self()#just in case
 	pass # Replace with function body.
-
-func spawn(item_type, monster):
-	#only do this if the item spot is not occupied
-	var node = ItemManager.ItemTypeToSceneMap[item_type].instance()
-	monster.spawn_item(node)
-
-func position_in_slot(Slot):
-	position = Slot.position + Slot.get_parent().position
 
 func _on_DraggedThing_DroppedField(Field, OldSlot):
 	if (OldSlot):
@@ -81,7 +60,5 @@ func _on_DraggedThing_DroppedTrash(OldSlot):
 
 func _on_DraggedThing_DroppedMonster(Monster, OldSlot):
 	if (OldSlot): OldSlot.set_item(null)
-	match(item_type):
-		ItemManager.ItemType.Seed: feedSeed(Monster, $PlantAttributes)
-		ItemManager.ItemType.Mutator: feedMutator(Monster)
+	feed(Monster)
 	self.queue_free()

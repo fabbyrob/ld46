@@ -5,12 +5,9 @@ var item_type = ItemManager.ItemType.Mutator
 onready var originalScale = $Sprite.scale
 
 
-func feedSeed(Monster, Attributes):
-		Monster.updateHP(Attributes.food_amount)
-		
-func feedMutator(Monster):
-		Monster.updateHP(-50)
-		spawn(ItemManager.ItemType.Mutator, Monster)
+func feed(Monster):
+	Monster.updateHP(-10)
+	spawn(ItemManager.ItemType.Mutator, Monster)
 		
 func apply_to_field(Field):
 	if (Field.is_growing()):
@@ -20,10 +17,7 @@ func apply_to_field(Field):
 		return true
 	
 func _to_string():
-	match(item_type):
-		ItemManager.ItemType.Seed: return $PlantAttributes.make_tooltip()
-		ItemManager.ItemType.Mutator: return "Mutator thing string"
-	return ""
+	return "Causes plants to grow weird, and monsters to do weird stuff."
 	
 # Declare member variables here. Examples:
 # var a = 2
@@ -31,11 +25,6 @@ func _to_string():
 
 #updates UI stuff of sprite
 func update_self():
-	if($PlantAttributes):
-		get_node("Sprite").modulate = $PlantAttributes.color
-		var new_scale = Vector2($PlantAttributes.get_size(), $PlantAttributes.get_size())
-		$Sprite.scale = originalScale*new_scale
-		
 	get_node("Control").set_tooltip(_to_string())
 		#mayeb scale should be an attribute
 	
@@ -51,9 +40,6 @@ func spawn(item_type, monster):
 	var node = ItemManager.ItemTypeToSceneMap[item_type].instance()
 	monster.spawn_item(node)
 
-func position_in_slot(Slot):
-	position = Slot.position + Slot.get_parent().position
-
 func _on_DraggedThing_DroppedField(Field, OldSlot):
 	if (OldSlot):
 		OldSlot.set_item(null)
@@ -63,7 +49,6 @@ func _on_DraggedThing_DroppedField(Field, OldSlot):
 		self.queue_free()
 	else:
 		if(OldSlot): OldSlot.set_item(self)
-
 
 func _on_DraggedThing_DroppedInventory(Slot, OldSlot):
 	var OtherItem = Slot.get_item() #the inv slot is now aware of what owns what
@@ -88,7 +73,5 @@ func _on_DraggedThing_DroppedTrash(OldSlot):
 func _on_DraggedThing_DroppedMonster(Monster, OldSlot):
 	if (OldSlot): 
 		OldSlot.set_item(null)
-	match(item_type):
-		ItemManager.ItemType.Seed: feedSeed(Monster, $PlantAttributes)
-		ItemManager.ItemType.Mutator: feedMutator(Monster)
+	feed(Monster)
 	self.queue_free()

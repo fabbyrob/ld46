@@ -8,7 +8,7 @@ var CurrentHP
 var RangeNode
 var TimerNode
 
-signal Feed
+signal monster_death
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -32,17 +32,15 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func Death():
-	print("She's DEAD!")
-
 func _process(delta):
 	RangeNode.set_value(CurrentHP)
 
 func updateHP(val):
 	CurrentHP += val
 	CurrentHP = clamp(CurrentHP, 0, MaxHP)
-	if (CurrentHP == 0):
-		Death()
+	if (CurrentHP <= 0):
+		emit_signal("monster_death")
+		$AnimationPlayer.stop()
 
 func _on_Button_button_down():
 	print(CurrentHP)
@@ -64,8 +62,9 @@ func _on_HPTimer_timeout():
 func spawn_item(node):
 	var slot = get_node("InvSlot")
 	if (slot.get_item() == null):
-		get_tree().get_root().add_child(node)
+		get_tree().get_root().get_node("MainScene").add_child(node)
 		slot.set_item(node)
+		$SpawnNotification.show_notification()
 
 #on click make an item
 func _on_Mouth_input_event(viewport, event, shape_idx):
@@ -76,3 +75,5 @@ func _on_Mouth_input_event(viewport, event, shape_idx):
 				var node = ItemManager.generate_random_item()
 				get_tree().get_root().add_child(node)
 				slot.set_item(node)
+				$PokeNotification.show_notification()
+				updateHP(-10)

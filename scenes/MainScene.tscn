@@ -1,16 +1,19 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Field.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Bar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/art/farm_art/tomato_stem.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/attack of the cucumbers.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://scenes/Items/Seed.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/UI/InventorySlot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/art/farm_art/arrow.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/farm_art/background.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/farm_art/plus.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/farm_art/minus.png" type="Texture" id=10]
 [ext_resource path="res://scenes/InventoryManager.gd" type="Script" id=11]
 [ext_resource path="res://assets/art/farm_art/trash.png" type="Texture" id=12]
 [ext_resource path="res://scenes/Items/Usable.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scripts/ScoreManager.gd" type="Script" id=14]
 [ext_resource path="res://scripts/SceneManager.gd" type="Script" id=17]
 [ext_resource path="res://assets/art/farm_art/sound.png" type="Texture" id=18]
 [ext_resource path="res://assets/art/farm_art/pause.png" type="Texture" id=19]
@@ -18,13 +21,32 @@
 [ext_resource path="res://assets/art/splash/resume.png" type="Texture" id=21]
 [ext_resource path="res://scripts/RNG.gd" type="Script" id=23]
 
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 35
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 18.732
 height = 8.83669
 
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 4 )
+
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 17 )
 ResumeButton = NodePath("GUI/ResumeButton")
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 524.609, 299.632 )
+scale = Vector2( 1.17395, 1.19756 )
+texture = ExtResource( 8 )
 
 [node name="Randomizer" type="Node2D" parent="."]
 script = ExtResource( 23 )
@@ -49,17 +71,17 @@ position = Vector2( 506.993, 67.9938 )
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Bar" parent="GUI" instance=ExtResource( 3 )]
-margin_left = 726.38
-margin_top = 387.824
-margin_right = 1722.38
-margin_bottom = 620.824
+margin_left = 765.893
+margin_top = 464.968
+margin_right = 1761.89
+margin_bottom = 697.968
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
-margin_left = 685.6
-margin_top = 535.811
-margin_right = 1791.6
-margin_bottom = 721.811
+margin_left = 886.071
+margin_top = 2.52171
+margin_right = 1323.07
+margin_bottom = 188.522
 rect_scale = Vector2( 0.3, 0.3 )
 alignment = 1
 __meta__ = {
@@ -68,6 +90,7 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="GUI/HBoxContainer"]
+visible = false
 margin_left = 172.0
 margin_right = 234.0
 margin_bottom = 186.0
@@ -77,35 +100,37 @@ __meta__ = {
 }
 
 [node name="Button2" type="Button" parent="GUI/HBoxContainer"]
-margin_left = 238.0
-margin_right = 300.0
+visible = false
+margin_left = 205.0
+margin_right = 267.0
 margin_bottom = 186.0
 icon = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" type="Button" parent="GUI/HBoxContainer"]
-margin_left = 304.0
-margin_right = 511.0
-margin_bottom = 186.0
-icon = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="PauseButton" type="Button" parent="GUI/HBoxContainer"]
-margin_left = 515.0
-margin_right = 722.0
+margin_left = 9.0
+margin_right = 216.0
 margin_bottom = 186.0
 icon = ExtResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExitButton" type="Button" parent="GUI/HBoxContainer"]
+margin_left = 220.0
+margin_right = 427.0
+margin_bottom = 186.0
+icon = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MuteButton" type="Button" parent="GUI/HBoxContainer"]
-margin_left = 726.0
-margin_right = 933.0
+visible = false
+margin_left = 660.0
+margin_right = 867.0
 margin_bottom = 186.0
 icon = ExtResource( 18 )
 __meta__ = {
@@ -120,6 +145,157 @@ margin_top = 196.046
 margin_right = 780.232
 margin_bottom = 382.046
 icon = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hints" type="Node2D" parent="GUI"]
+
+[node name="Label" type="Label" parent="GUI/Hints"]
+margin_left = 178.252
+margin_top = 547.299
+margin_right = 332.252
+margin_bottom = 563.299
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Trash items here."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GUI/Hints/Label"]
+position = Vector2( 21.2319, -22.7574 )
+rotation = -0.436767
+scale = Vector2( 0.236817, 0.186643 )
+texture = ExtResource( 7 )
+
+[node name="Label2" type="Label" parent="GUI/Hints"]
+margin_left = 672.142
+margin_top = 214.249
+margin_right = 844.142
+margin_bottom = 249.249
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Drag things to 
+monster to feed it."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GUI/Hints/Label2"]
+position = Vector2( 77.0801, 65.0245 )
+rotation = -3.05902
+scale = Vector2( 0.236817, 0.186643 )
+texture = ExtResource( 7 )
+
+[node name="Label3" type="Label" parent="GUI/Hints"]
+margin_left = 817.536
+margin_top = 423.986
+margin_right = 984.536
+margin_bottom = 458.986
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Poke the monster 
+for a surprise."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GUI/Hints/Label3"]
+position = Vector2( 107.469, -21.369 )
+rotation = 0.235117
+scale = Vector2( 0.20225, 0.166139 )
+texture = ExtResource( 7 )
+
+[node name="Label7" type="Label" parent="GUI/Hints"]
+margin_left = 742.901
+margin_top = 549.423
+margin_right = 995.901
+margin_bottom = 584.423
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "You lose when your monster 
+runs out of health."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GUI/Hints/Label7"]
+position = Vector2( -0.261963, -19.4187 )
+rotation = 5.9411
+scale = Vector2( -0.250949, 0.227424 )
+texture = ExtResource( 7 )
+
+[node name="Label5" type="Label" parent="GUI/Hints"]
+margin_left = 97.7456
+margin_top = 221.219
+margin_right = 205.746
+margin_bottom = 256.219
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Store good
+stuff here!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="arrow" type="Sprite" parent="GUI/Hints/Label5"]
+position = Vector2( 33.4614, -29.2086 )
+rotation = 0.235117
+scale = Vector2( 0.239328, 0.170156 )
+texture = ExtResource( 7 )
+
+[node name="arrow2" type="Sprite" parent="GUI/Hints/Label5"]
+position = Vector2( 24.2216, 65.889 )
+rotation = -3.12052
+scale = Vector2( -0.229225, 0.229003 )
+texture = ExtResource( 7 )
+
+[node name="Label4" type="Label" parent="GUI/Hints"]
+margin_left = 325.197
+margin_top = 218.271
+margin_right = 516.197
+margin_bottom = 253.271
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Drag seeds to fields
+to grow more food!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="GUI/Hints"]
+margin_left = 306.759
+margin_top = 464.491
+margin_right = 561.759
+margin_bottom = 499.491
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Grown plants will be slightly 
+different than their parents!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="GUI"]
+margin_left = 248.0
+margin_top = 125.0
+margin_right = 710.0
+margin_bottom = 407.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EndGame" type="AcceptDialog" parent="GUI/Control"]
+pause_mode = 2
+margin_left = 25.0
+margin_top = 21.0
+margin_right = 438.0
+margin_bottom = 261.0
+theme = SubResource( 5 )
+window_title = ""
+dialog_text = "Oh no! Your monster died!
+Better luck next time."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -173,17 +349,30 @@ shape = SubResource( 1 )
 [node name="Item" parent="." instance=ExtResource( 13 )]
 position = Vector2( 48.6687, 288.557 )
 
-[node name="plant" type="Sprite" parent="."]
-position = Vector2( 915.4, 75.4896 )
-scale = Vector2( 0.223743, 0.240755 )
-texture = ExtResource( 4 )
-
 [node name="Monster" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -0.595795 )
+position = Vector2( 838.834, 246.077 )
 HPbar = NodePath("../GUI/Bar")
+
+[node name="ScoreManager" type="Node2D" parent="."]
+script = ExtResource( 14 )
+
+[node name="ScoreLabel" type="Label" parent="ScoreManager"]
+margin_left = 686.897
+margin_top = 80.0483
+margin_right = 857.897
+margin_bottom = 106.048
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "SCORE: 0000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_down" from="GUI/HBoxContainer/Button" to="Monster" method="_on_Button_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/Button2" to="Monster" method="_on_Button2_button_down"]
-[connection signal="button_down" from="GUI/HBoxContainer/ExitButton" to="." method="_on_ExitButton_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/PauseButton" to="." method="_on_PauseButton_button_down"]
+[connection signal="button_down" from="GUI/HBoxContainer/ExitButton" to="." method="_on_ExitButton_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/MuteButton" to="." method="_on_MuteButton_button_down"]
 [connection signal="button_down" from="GUI/ResumeButton" to="." method="_on_ResumeButton_button_down"]
+[connection signal="confirmed" from="GUI/Control/EndGame" to="." method="_on_EndGame_confirmed"]
+[connection signal="monster_death" from="Monster" to="." method="_on_Monster_monster_death"]
+[connection signal="monster_death" from="Monster" to="ScoreManager" method="_on_Monster_monster_death"]

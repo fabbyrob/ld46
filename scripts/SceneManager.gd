@@ -34,3 +34,13 @@ func _on_ResumeButton_button_down():
 	var resume_node = get_node(ResumeButton)
 	resume_node.hide()
 	get_tree().paused = false
+
+
+func _on_Monster_monster_death():
+	$GUI/Hints.hide()
+	$GUI/Control/EndGame.show()
+	get_tree().paused = true
+
+
+func _on_EndGame_confirmed():
+	get_tree().change_scene("res://scenes/Splash.tscn")

@@ -32,10 +32,10 @@ __meta__ = {
 }
 
 [node name="StartButton" type="TextureButton" parent="Logo"]
-margin_left = -175.934
-margin_top = 317.658
-margin_right = 364.066
-margin_bottom = 497.658
+margin_left = -178.378
+margin_top = 315.214
+margin_right = 361.622
+margin_bottom = 495.214
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 2 )
 __meta__ = {
@@ -44,9 +44,9 @@ __meta__ = {
 
 [node name="CreditsButton" type="TextureButton" parent="Logo"]
 margin_left = 1199.77
-margin_top = 823.468
+margin_top = 821.024
 margin_right = 1739.77
-margin_bottom = 1003.47
+margin_bottom = 1001.03
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 5 )
 __meta__ = {
@@ -54,6 +54,7 @@ __meta__ = {
 }
 
 [node name="ScoresButton" type="TextureButton" parent="Logo"]
+visible = false
 margin_left = 1202.21
 margin_top = 315.215
 margin_right = 1742.21

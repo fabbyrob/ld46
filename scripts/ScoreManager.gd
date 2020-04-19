@@ -1,10 +1,12 @@
-extends RichTextLabel
-export (NodePath) var TimerNode
+extends Node
+
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var dead = false
+
+var time_alive = 0
+var alive = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,24 +14,14 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func show_notification():
-	if (not dead):
-		var timer = get_node(TimerNode)
-		timer.start()
-		show()
+func _process(delta):
+	if alive:
+		time_alive += delta
+		update_label()
 	
-
-
-
-func _on_Timer_timeout():
-	hide()
-	pass # Replace with function body.
-
+func update_label():
+	$ScoreLabel.text = "SCORE: %8d" % time_alive 
 
 func _on_Monster_monster_death():
-	hide()
-	dead = true
+	alive = false
 	pass # Replace with function body.
