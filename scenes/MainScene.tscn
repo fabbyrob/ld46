@@ -28,7 +28,7 @@
 radius = 88.1877
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 423.388, 430.95 )
+extents = Vector2( 86.7758, 85.375 )
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 18.732
@@ -61,46 +61,53 @@ shape = SubResource( 1 )
 
 [node name="Field" type="Node2D" parent="."]
 position = Vector2( 302.626, 127.576 )
-scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 8 )
 
 [node name="plot1" type="Area2D" parent="Field"]
 script = ExtResource( 22 )
 
 [node name="plot1_sprite" type="Sprite" parent="Field/plot1"]
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
 [node name="plot1_collision" type="CollisionPolygon2D" parent="Field/plot1"]
+scale = Vector2( 0.2, 0.2 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="plot2" type="Area2D" parent="Field"]
-position = Vector2( 500, 0 )
+position = Vector2( 100, 0 )
 script = ExtResource( 22 )
 
 [node name="plot2_sprite" type="Sprite" parent="Field/plot2"]
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
 [node name="plot2_collision" type="CollisionPolygon2D" parent="Field/plot2"]
+scale = Vector2( 0.2, 0.2 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="plot3" type="Area2D" parent="Field"]
-position = Vector2( 0, 500 )
+position = Vector2( 0, 100 )
 script = ExtResource( 22 )
 
 [node name="plot3_sprite" type="Sprite" parent="Field/plot3"]
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
 [node name="plot3_collision" type="CollisionPolygon2D" parent="Field/plot3"]
+scale = Vector2( 0.2, 0.2 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="plot4" type="Area2D" parent="Field"]
-position = Vector2( 500, 500 )
+position = Vector2( 100, 100 )
 script = ExtResource( 22 )
 
 [node name="plot4_sprite" type="Sprite" parent="Field/plot4"]
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
 [node name="plot4_collision" type="CollisionPolygon2D" parent="Field/plot4"]
+scale = Vector2( 0.2, 0.2 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="Timer" type="Timer" parent="Field"]
@@ -109,14 +116,15 @@ wait_time = 10.0
 [node name="Area2D" type="Area2D" parent="Field"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Area2D"]
-position = Vector2( 250, 250 )
+position = Vector2( 49.5497, 50.4997 )
 shape = SubResource( 2 )
 
 [node name="GrowthProgressRadial" type="TextureProgress" parent="Field"]
-margin_left = 784.75
-margin_top = 138.5
-margin_right = 964.75
-margin_bottom = 318.5
+margin_left = -19.95
+margin_top = -19.0001
+margin_right = 160.05
+margin_bottom = 161.0
+rect_scale = Vector2( 0.75, 0.75 )
 texture_under = ExtResource( 14 )
 texture_progress = ExtResource( 15 )
 fill_mode = 4

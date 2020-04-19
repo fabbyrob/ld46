@@ -28,7 +28,7 @@ func swap_item(item):
 
 func move_item_to_slot():
 	if (_item):
-		_item.global_position = to_global(position) # + get_parent().position
+		_item.global_position = global_position # + get_parent().position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
