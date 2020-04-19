@@ -2,7 +2,7 @@ extends Area2D
 
 class_name ItemSlot
 
-var _item : Item = null
+var _item  = null
 
 # Declare member variables here. Examples:
 # var a = 2

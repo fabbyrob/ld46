@@ -52,4 +52,5 @@ wait_time = 5.0
 [node name="InvSlot" parent="." instance=ExtResource( 5 )]
 position = Vector2( 970.432, 246.106 )
 [connection signal="timeout" from="HPTimer" to="." method="_on_HPTimer_timeout"]
+[connection signal="input_event" from="Mouth" to="." method="_on_Mouth_input_event"]
 [connection signal="timeout" from="SpawnNotification/NotificationTimer" to="SpawnNotification" method="_on_Timer_timeout"]

@@ -1,7 +1,7 @@
 extends Node2D
 class_name Item
 
-var item_type = ItemManager.ItemType.Seed
+var item_type = ItemManager.ItemType.Mutator
 onready var originalScale = $Sprite.scale
 
 
@@ -9,7 +9,7 @@ func feedSeed(Monster, Attributes):
 		Monster.updateHP(Attributes.food_amount)
 		
 func feedMutator(Monster):
-		Monster.updateHP(-5)
+		Monster.updateHP(-50)
 		spawn(ItemManager.ItemType.Mutator, Monster)
 		
 func _to_string():
@@ -80,7 +80,8 @@ func _on_DraggedThing_DroppedTrash(OldSlot):
 
 
 func _on_DraggedThing_DroppedMonster(Monster, OldSlot):
-	if (OldSlot): OldSlot.set_item(null)
+	if (OldSlot): 
+		OldSlot.set_item(null)
 	match(item_type):
 		ItemManager.ItemType.Seed: feedSeed(Monster, $PlantAttributes)
 		ItemManager.ItemType.Mutator: feedMutator(Monster)

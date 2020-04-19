@@ -60,3 +60,19 @@ func _on_Button2_button_down():
 func _on_HPTimer_timeout():
 	updateHP(HPdecay)
 	TimerNode.start(TimerTick)
+
+func spawn_item(node):
+	var slot = get_node("InvSlot")
+	if (slot.get_item() == null):
+		get_tree().get_root().add_child(node)
+		slot.set_item(node)
+
+#on click make an item
+func _on_Mouth_input_event(viewport, event, shape_idx):
+	if(event is InputEventMouseButton):
+		if (event.button_index == BUTTON_LEFT and event.pressed):
+			var slot = get_node("InvSlot")
+			if (slot.get_item() == null):
+				var node = ItemManager.generate_random_item()
+				get_tree().get_root().add_child(node)
+				slot.set_item(node)

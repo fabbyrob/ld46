@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/art/farm_art/tomato.png" type="Texture" id=1]
 [ext_resource path="res://scripts/PlantAttributes.gd" type="Script" id=2]
 [ext_resource path="res://scripts/ItemMovement.gd" type="Script" id=3]
-[ext_resource path="res://scripts/Item.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Plant.gd" type="Script" id=4]
 [ext_resource path="res://assets/fonts/attack of the cucumbers.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
