@@ -1,26 +1,21 @@
 extends Node2D
 class_name Item
 
-enum ItemType {Seed, Mutator}
-export (ItemType) var item_type 
+export (ItemManager.ItemType) var item_type = ItemManager.ItemType.Seed
 onready var originalScale = $Sprite.scale
 
-var ItemTypeToSceneMap = 	{
-	ItemType.Seed:load("res://scenes/Items/Seed.tscn"), 
-	ItemType.Mutator:load("res://scenes/Items/Usable.tscn")
-	}
 
 func feedSeed(Monster, Attributes):
 		Monster.updateHP(Attributes.food_amount)
 		
 func feedMutator(Monster):
 		Monster.updateHP(-5)
-		spawn(ItemType.Mutator, Monster)
+		spawn(ItemManager.ItemType.Mutator, Monster)
 		
 func _to_string():
 	match(item_type):
-		ItemType.Seed: return $PlantAttributes.make_tooltip()
-		ItemType.Mutator: return "Mutator thing string"
+		ItemManager.ItemType.Seed: return $PlantAttributes.make_tooltip()
+		ItemManager.ItemType.Mutator: return "Mutator thing string"
 	return ""
 	
 # Declare member variables here. Examples:
@@ -46,12 +41,8 @@ func _ready():
 
 func spawn(item_type, monster):
 	#only do this if the item spot is not occupied
-	var inv_slot = monster.get_node("InvSlot")
-	if (inv_slot.get_item() == null):
-		var node = ItemTypeToSceneMap[item_type].instance()
-		get_tree().get_root().get_node("MainScene").add_child(node)
-		inv_slot.set_item(node)
-		monster.get_node("SpawnNotification").show_notification()
+	var node = ItemManager.ItemTypeToSceneMap[item_type].instance()
+	monster.spawn_item(node)
 
 func position_in_slot(Slot):
 	position = Slot.position + Slot.get_parent().position
@@ -91,6 +82,6 @@ func _on_DraggedThing_DroppedTrash(OldSlot):
 func _on_DraggedThing_DroppedMonster(Monster, OldSlot):
 	if (OldSlot): OldSlot.set_item(null)
 	match(item_type):
-		ItemType.Seed: feedSeed(Monster, $PlantAttributes)
-		ItemType.Mutator: feedMutator(Monster)
+		ItemManager.ItemType.Seed: feedSeed(Monster, $PlantAttributes)
+		ItemManager.ItemType.Mutator: feedMutator(Monster)
 	self.queue_free()
