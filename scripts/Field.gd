@@ -7,7 +7,6 @@ var SeedScene = load("res://scenes/Items/Seed.tscn")
 
 #
 export(bool) var plantable = true
-export var mutation_modifier = 1.0
 
 #MEMBERS
 var field_attrs = FieldAttributes.new()
@@ -35,14 +34,8 @@ func plant(attributes):
 	else:
 		return false
 
-func is_empty():
-	if (planted_attrs != null):
-		return false
-		
-	for i in range(1, 5):
-		if (get_node("plot%d" % [i]).get_item()):
-			return false
-	return true
+func is_growing():
+	return planted_attrs != null
 
 func _on_Timer_timeout():
 	#stop timer

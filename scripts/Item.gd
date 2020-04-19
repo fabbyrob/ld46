@@ -12,6 +12,13 @@ func feedMutator(Monster):
 		Monster.updateHP(-50)
 		spawn(ItemManager.ItemType.Mutator, Monster)
 		
+func apply_to_field(Field):
+	if (Field.is_growing()):
+		return false
+	else:
+		Field.field_attrs.mutation_modifier *= 1.1
+		return true
+	
 func _to_string():
 	match(item_type):
 		ItemManager.ItemType.Seed: return $PlantAttributes.make_tooltip()
@@ -50,9 +57,8 @@ func position_in_slot(Slot):
 func _on_DraggedThing_DroppedField(Field, OldSlot):
 	if (OldSlot):
 		OldSlot.set_item(null)
-	var attr = $PlantAttributes
-	var planted = Field.plant(attr)
-	if (planted == true):
+	var applied = apply_to_field(Field)
+	if (applied == true):
 		get_parent().remove_child(self)
 		self.queue_free()
 	else:
