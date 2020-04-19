@@ -12,7 +12,7 @@ export(float,0,1,0.05) var mutation_rate = 0.1
 
 export(int,0,100,5) var food_amount = 15
 
-export(float,0,30,0.5) var growth_time = 10
+export(float,0,30,0.5) var growth_time = 5
 
 func mutate():
 	mutation_rate += Randomizer.sample()
