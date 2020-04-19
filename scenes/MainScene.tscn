@@ -1,12 +1,11 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://assets/art/farm_art/potato.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Monster.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/farm_art/dirt.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/art/farm_art/tomato_stem.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Items/Seed.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/UI/InventorySlot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scripts/Monster.gd" type="Script" id=7]
 [ext_resource path="res://scripts/Field.gd" type="Script" id=8]
 [ext_resource path="res://assets/art/farm_art/plus.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/farm_art/minus.png" type="Texture" id=10]
@@ -24,13 +23,10 @@
 [ext_resource path="res://scripts/ItemSlot.gd" type="Script" id=22]
 [ext_resource path="res://scripts/RNG.gd" type="Script" id=23]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 88.1877
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 86.7758, 85.375 )
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 18.732
 height = 8.83669
 
@@ -43,21 +39,6 @@ script = ExtResource( 23 )
 
 [node name="Seed2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 166.173, 208.499 )
-
-[node name="Monster" type="Sprite" parent="."]
-modulate = Color( 0.764706, 0.14902, 0.745098, 1 )
-position = Vector2( 820.087, 247.357 )
-texture = ExtResource( 1 )
-script = ExtResource( 7 )
-HPbar = NodePath("../GUI/Bar")
-TimerPath = NodePath("../Monster/Timer")
-
-[node name="Timer" type="Timer" parent="Monster"]
-
-[node name="Mouth" type="Area2D" parent="Monster"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Monster/Mouth"]
-shape = SubResource( 1 )
 
 [node name="Field" type="Node2D" parent="."]
 position = Vector2( 302.626, 127.576 )
@@ -117,7 +98,7 @@ wait_time = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Area2D"]
 position = Vector2( 49.5497, 50.4997 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="GrowthProgressRadial" type="TextureProgress" parent="Field"]
 margin_left = -19.95
@@ -257,7 +238,7 @@ texture = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trash"]
 position = Vector2( -2.08768, -2.08768 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Item" parent="." instance=ExtResource( 13 )]
 position = Vector2( 360.284, 396.401 )
@@ -266,10 +247,9 @@ position = Vector2( 360.284, 396.401 )
 position = Vector2( 304.682, 94.5559 )
 scale = Vector2( 0.223743, 0.240755 )
 texture = ExtResource( 4 )
-[connection signal="timeout" from="Monster/Timer" to="Monster" method="_on_Timer_timeout"]
+
+[node name="Monster" parent="." instance=ExtResource( 1 )]
 [connection signal="timeout" from="Field/Timer" to="Field" method="_on_Timer_timeout"]
-[connection signal="button_down" from="GUI/HBoxContainer/Button" to="Monster" method="_on_Button_button_down"]
-[connection signal="button_down" from="GUI/HBoxContainer/Button2" to="Monster" method="_on_Button2_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/ExitButton" to="." method="_on_ExitButton_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/PauseButton" to="." method="_on_PauseButton_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/MuteButton" to="." method="_on_MuteButton_button_down"]

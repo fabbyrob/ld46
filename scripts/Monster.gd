@@ -42,8 +42,6 @@ func updateHP(val):
 	if (CurrentHP == 0):
 		Death()
 
-
-
 func _on_Button_button_down():
 	print(CurrentHP)
 	updateHP(5)

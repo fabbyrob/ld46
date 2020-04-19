@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/ItemSlot.gd"
 }, {
-"base": "Object",
+"base": "Node2D",
 "class": "PlantAttributes",
 "language": "GDScript",
 "path": "res://scripts/PlantAttributes.gd"
@@ -45,7 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ld46"
-run/main_scene="res://scenes/MainScene.tscn"
+run/main_scene="res://scenes/Splash.tscn"
 config/icon="res://icon.png"
 
 [autoload]

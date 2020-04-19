@@ -1,9 +1,13 @@
 extends Node2D
 class_name Item
 
-#i'm over engineering this, stop it me.
 enum ItemType {Seed, Mutator}
 export (ItemType) var item_type 
+
+var ItemTypeToSceneMap = 	{
+	ItemType.Seed:load("res://scenes//Items//Seed.tscn"), 
+	ItemType.Mutator:load("res://scenes//Items//Usable.tscn") 
+	}
 
 func feedSeed(Monster, Attributes):
 		Monster.updateHP(Attributes.food_amount)
@@ -24,9 +28,12 @@ func _ready():
 	pass # Replace with function body.
 
 func spawn(item_type, monster):
+	#only do this if the item spot is not occupied
 	var spawn_point = monster.get_node("SpawnPoint")
-	
-	pass
+	var node = ItemTypeToSceneMap[item_type].instance()
+	get_tree().get_root().get_node("MainScene").add_child(node)
+	node.global_position = spawn_point.global_position
+	monster.get_node("SpawnNotification").show_notification()
 
 func position_in_slot(Slot):
 	position = Slot.position + Slot.get_parent().position
