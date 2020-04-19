@@ -17,4 +17,4 @@ func _process(delta):
 		pass # TODO hide progress wheel
 	else:
 		visible = true
-		set_value(ceil(timer.time_left))
+		set_value(timer.time_left*100)

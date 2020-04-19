@@ -1,30 +1,22 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Monster.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/farm_art/dirt.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Field.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/art/farm_art/tomato_stem.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Items/Seed.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/UI/InventorySlot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scripts/Field.gd" type="Script" id=8]
 [ext_resource path="res://assets/art/farm_art/plus.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/farm_art/minus.png" type="Texture" id=10]
 [ext_resource path="res://scenes/InventoryManager.gd" type="Script" id=11]
 [ext_resource path="res://assets/art/farm_art/trash.png" type="Texture" id=12]
 [ext_resource path="res://scenes/Items/Usable.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/art/farm_art/circle_black.png" type="Texture" id=14]
-[ext_resource path="res://assets/art/farm_art/circle_orange.png" type="Texture" id=15]
-[ext_resource path="res://scripts/GrowthProgress.gd" type="Script" id=16]
 [ext_resource path="res://scripts/SceneManager.gd" type="Script" id=17]
 [ext_resource path="res://assets/art/farm_art/sound.png" type="Texture" id=18]
 [ext_resource path="res://assets/art/farm_art/pause.png" type="Texture" id=19]
 [ext_resource path="res://assets/art/farm_art/exit.png" type="Texture" id=20]
 [ext_resource path="res://assets/art/splash/resume.png" type="Texture" id=21]
-[ext_resource path="res://scripts/ItemSlot.gd" type="Script" id=22]
 [ext_resource path="res://scripts/RNG.gd" type="Script" id=23]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 86.7758, 85.375 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 18.732
@@ -38,81 +30,19 @@ ResumeButton = NodePath("GUI/ResumeButton")
 script = ExtResource( 23 )
 
 [node name="Seed2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 166.173, 208.499 )
+position = Vector2( 47.0085, 206.712 )
 
-[node name="Field" type="Node2D" parent="."]
-position = Vector2( 302.626, 127.576 )
-script = ExtResource( 8 )
+[node name="Field" parent="." instance=ExtResource( 2 )]
+position = Vector2( 247.81, 306.323 )
 
-[node name="plot1" type="Area2D" parent="Field"]
-script = ExtResource( 22 )
+[node name="Field2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 247.215, 65.0146 )
 
-[node name="plot1_sprite" type="Sprite" parent="Field/plot1"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
+[node name="Field3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 509.376, 307.514 )
 
-[node name="plot1_collision" type="CollisionPolygon2D" parent="Field/plot1"]
-scale = Vector2( 0.2, 0.2 )
-polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
-
-[node name="plot2" type="Area2D" parent="Field"]
-position = Vector2( 100, 0 )
-script = ExtResource( 22 )
-
-[node name="plot2_sprite" type="Sprite" parent="Field/plot2"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
-
-[node name="plot2_collision" type="CollisionPolygon2D" parent="Field/plot2"]
-scale = Vector2( 0.2, 0.2 )
-polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
-
-[node name="plot3" type="Area2D" parent="Field"]
-position = Vector2( 0, 100 )
-script = ExtResource( 22 )
-
-[node name="plot3_sprite" type="Sprite" parent="Field/plot3"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
-
-[node name="plot3_collision" type="CollisionPolygon2D" parent="Field/plot3"]
-scale = Vector2( 0.2, 0.2 )
-polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
-
-[node name="plot4" type="Area2D" parent="Field"]
-position = Vector2( 100, 100 )
-script = ExtResource( 22 )
-
-[node name="plot4_sprite" type="Sprite" parent="Field/plot4"]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
-
-[node name="plot4_collision" type="CollisionPolygon2D" parent="Field/plot4"]
-scale = Vector2( 0.2, 0.2 )
-polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
-
-[node name="Timer" type="Timer" parent="Field"]
-wait_time = 10.0
-
-[node name="Area2D" type="Area2D" parent="Field"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Field/Area2D"]
-position = Vector2( 49.5497, 50.4997 )
-shape = SubResource( 1 )
-
-[node name="GrowthProgressRadial" type="TextureProgress" parent="Field"]
-margin_left = -19.95
-margin_top = -19.0001
-margin_right = 160.05
-margin_bottom = 161.0
-rect_scale = Vector2( 0.75, 0.75 )
-texture_under = ExtResource( 14 )
-texture_progress = ExtResource( 15 )
-fill_mode = 4
-script = ExtResource( 16 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Field4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 506.993, 67.9938 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -195,7 +125,7 @@ __meta__ = {
 }
 
 [node name="Seed" parent="." instance=ExtResource( 5 )]
-position = Vector2( 158.004, 126.496 )
+position = Vector2( 51.9476, 125.9 )
 scale = Vector2( 0.535, 1 )
 
 [node name="Inventory" type="Node2D" parent="."]
@@ -241,15 +171,18 @@ position = Vector2( -2.08768, -2.08768 )
 shape = SubResource( 2 )
 
 [node name="Item" parent="." instance=ExtResource( 13 )]
-position = Vector2( 360.284, 396.401 )
+position = Vector2( 48.6687, 288.557 )
 
 [node name="plant" type="Sprite" parent="."]
-position = Vector2( 304.682, 94.5559 )
+position = Vector2( 915.4, 75.4896 )
 scale = Vector2( 0.223743, 0.240755 )
 texture = ExtResource( 4 )
 
 [node name="Monster" parent="." instance=ExtResource( 1 )]
-[connection signal="timeout" from="Field/Timer" to="Field" method="_on_Timer_timeout"]
+position = Vector2( 0, -0.595795 )
+HPbar = NodePath("../GUI/Bar")
+[connection signal="button_down" from="GUI/HBoxContainer/Button" to="Monster" method="_on_Button_button_down"]
+[connection signal="button_down" from="GUI/HBoxContainer/Button2" to="Monster" method="_on_Button2_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/ExitButton" to="." method="_on_ExitButton_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/PauseButton" to="." method="_on_PauseButton_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/MuteButton" to="." method="_on_MuteButton_button_down"]

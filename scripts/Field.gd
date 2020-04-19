@@ -28,7 +28,7 @@ func plant(attributes : PlantAttributes):
 		planted_attrs = attributes.duplicate()
 		#start the growth timer
 		$Timer.start(planted_attrs.growth_time)
-		$GrowthProgressRadial.set_max(planted_attrs.growth_time)
+		$GrowthProgressRadial.set_max(planted_attrs.growth_time*100)
 		#prevent any more planting
 		print(planted_attrs.mutation_rate)
 		return true
@@ -50,13 +50,12 @@ func _on_Timer_timeout():
 	# add 4 plants to field area, with/without mutation
 	for i in range(4):
 		var grown_attrs = planted_attrs.duplicate()
-		#TODO create a plant item with these grown_attrs
 		var new_plant = SeedScene.instance()
 		new_plant.get_node("PlantAttributes").replace_by(grown_attrs)
 		get_tree().get_root().get_node("MainScene").add_child(new_plant)
 		grown_attrs.mutate(mutation_modifier)
-		#new_plant.update_self() # TODO
-		#TODO add plant item to scene in one of the field slots
+		new_plant.update_self() 
+		#add plant item to scene in one of the field slots
 		var plot = get_node("plot%d" % [i+1]) as ItemSlot
 		plot.set_item(new_plant)
 		

@@ -57,7 +57,7 @@ func click_drag_event(viewport, event, shape_idx):
 							foundNewArea = true
 							break
 						elif ("Trash" in area.get_name()):#hit a trash can
-							emit_signal("DroppedTrash")
+							emit_signal("DroppedTrash", pickupSource)
 							foundNewArea = true
 							break
 						elif ("Mouth" in area.get_name()):#hit a mouth

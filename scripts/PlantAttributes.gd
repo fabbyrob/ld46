@@ -27,7 +27,7 @@ func mutate(mutation_modifier):
 		food_amount = RNG.sample_normal(food_amount, 2.0)
 	#growth time
 	if RNG.sample() < mutation_rate*mutation_modifier:
-		growth_time = RNG.sample_normal(growth_time, 2.0)
+		growth_time = clamp(RNG.sample_normal(growth_time, 2.0), 1.0, 10)
 	#color
 	if RNG.sample() < mutation_rate*mutation_modifier:
 		color = Color(RNG.sample_normal_frac(color.r, 0.1),

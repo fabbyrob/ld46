@@ -35,10 +35,11 @@ func _ready():
 func Death():
 	print("She's DEAD!")
 
+func _process(delta):
+	RangeNode.set_value(CurrentHP)
 
 func updateHP(val):
-	RangeNode.set_value(RangeNode.get_value()+val)
-	CurrentHP = RangeNode.get_value()
+	CurrentHP += val
 	if (CurrentHP == 0):
 		Death()
 
@@ -55,7 +56,6 @@ func _on_Button2_button_down():
 
 #every timer tick decreases HP
 #then restarts the timer
-func _on_Timer_timeout():
+func _on_HPTimer_timeout():
 	updateHP(HPdecay)
 	TimerNode.start(TimerTick)
-	pass # Replace with function body.

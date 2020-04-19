@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/art/farm_art/potato.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Monster.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/attack of the cucumbers.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scenes/TimerUI.gd" type="Script" id=4]
+[ext_resource path="res://scenes/UI/InventorySlot.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 88.1877
@@ -13,30 +14,29 @@ size = 17
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[node name="Monster" type="Sprite"]
+[node name="Monster" type="Node2D"]
+script = ExtResource( 2 )
+TimerPath = NodePath("HPTimer")
+
+[node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.764706, 0.14902, 0.745098, 1 )
 position = Vector2( 820.087, 247.357 )
 texture = ExtResource( 1 )
-script = ExtResource( 2 )
-HPbar = NodePath("../GUI/Bar")
-TimerPath = NodePath("../Monster/Timer")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="HPTimer" type="Timer" parent="."]
 
 [node name="Mouth" type="Area2D" parent="."]
+position = Vector2( 820.087, 247.357 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mouth"]
 shape = SubResource( 1 )
 
-[node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2( 150.792, -0.375519 )
-
 [node name="SpawnNotification" type="RichTextLabel" parent="."]
 visible = false
-margin_left = 55.2685
-margin_top = -146.953
-margin_right = 199.268
-margin_bottom = -79.9533
+margin_left = 875.355
+margin_top = 100.404
+margin_right = 1019.35
+margin_bottom = 167.404
 custom_fonts/normal_font = SubResource( 2 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Your monster found you a present!"
@@ -44,9 +44,12 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-TimerNode = NodePath("Timer")
+TimerNode = NodePath("NotificationTimer")
 
-[node name="Timer" type="Timer" parent="SpawnNotification"]
+[node name="NotificationTimer" type="Timer" parent="SpawnNotification"]
 wait_time = 5.0
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="SpawnNotification/Timer" to="SpawnNotification" method="_on_Timer_timeout"]
+
+[node name="InvSlot" parent="." instance=ExtResource( 5 )]
+position = Vector2( 970.432, 246.106 )
+[connection signal="timeout" from="HPTimer" to="." method="_on_HPTimer_timeout"]
+[connection signal="timeout" from="SpawnNotification/NotificationTimer" to="SpawnNotification" method="_on_Timer_timeout"]
