@@ -1,4 +1,4 @@
-extends Object
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -17,3 +17,11 @@ func _ready():
 
 func sample():
 	return rng.randf()
+	
+func sample_normal(mean, sd):
+	return rng.randfn(mean, sd)
+	
+#samples form a normal, but clamps balue [0,1]
+func sample_normal_frac(mean, sd):
+	return clamp(rng.randfn(mean, sd), 0.0, 1.0)
+	
