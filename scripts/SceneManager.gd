@@ -42,7 +42,7 @@ func _on_ResumeButton_button_down():
 
 func _on_Monster_monster_death():
 	$GUI/Hints.hide()
-	$GUI/Control/EndGame.show()
+	$GUI/EndGame.show()
 	get_tree().paused = true
 
 
