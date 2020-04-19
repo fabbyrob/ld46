@@ -47,7 +47,7 @@ func click_drag_event(viewport, event, shape_idx):
 				if (len(areas) > 0):
 					for area in areas:
 						var _parent = area.get_parent()
-						if(area is Field):
+						if(_parent is Field):
 							emit_signal("DroppedField", _parent, pickupSource)
 							foundNewArea = true
 							break

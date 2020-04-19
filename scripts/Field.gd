@@ -2,6 +2,9 @@ extends Node
 
 class_name Field
 
+#PREFABS
+var SeedScene = load("res://scenes/Items/Seed.tscn")
+
 #EXPORTS
 export(bool) var plantable = true
 
@@ -24,8 +27,7 @@ func plant(attributes : PlantAttributes):
 		planted_attrs = attributes.duplicate()
 		#start the growth timer
 		$Timer.start(planted_attrs.growth_time)
-		$GrowthProgressRadial.set_begin(planted_attrs.growth_time)
-		$GrowthProgressRadial.set_end(0)
+		$GrowthProgressRadial.set_max(planted_attrs.growth_time)
 		#prevent any more planting
 		plantable = false
 		print(planted_attrs.mutation_rate)
@@ -35,12 +37,19 @@ func plant(attributes : PlantAttributes):
 	
 
 func _on_Timer_timeout():
+	#stop timer
+	$Timer.stop()
 	# add 4 plants to field area, with/without mutation
 	for i in range(4):
 		var grown_attrs = planted_attrs.duplicate()
 		grown_attrs.mutate()
 		#TODO create a plant item with these grown_attrs
+		var new_plant = SeedScene.instance()
+		new_plant.get_node("PlantAttributes").replace_by(grown_attrs)
 		#TODO add plant item to scene in one of the field slots
-		pass
+		var plot_sprite = get_node("plot%d" % [i+1])
+		get_tree().get_root().add_child(new_plant)
+		new_plant.position = plot_sprite.position
+		
 	planted_attrs.queue_free()
-	plantable = true
+	planted_attrs = null

@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/art/farm_art/dirt.png" type="Texture" id=2]
 [ext_resource path="res://scenes/Bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/art/farm_art/tomato_stem.png" type="Texture" id=4]
-[ext_resource path="res://scenes/Seed.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Items/Seed.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/UI/InventorySlot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/Monster.gd" type="Script" id=7]
 [ext_resource path="res://scripts/Field.gd" type="Script" id=8]
@@ -235,6 +235,7 @@ shape = SubResource( 3 )
 [node name="Item" parent="." instance=ExtResource( 13 )]
 position = Vector2( 360.284, 396.401 )
 [connection signal="timeout" from="Monster/Timer" to="Monster" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Field/Timer" to="Field" method="_on_Timer_timeout"]
 [connection signal="button_down" from="GUI/HBoxContainer/Button" to="Monster" method="_on_Button_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/Button2" to="Monster" method="_on_Button2_button_down"]
 [connection signal="button_down" from="GUI/HBoxContainer/ExitButton" to="." method="_on_ExitButton_button_down"]
