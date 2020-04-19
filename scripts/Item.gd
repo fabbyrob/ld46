@@ -5,8 +5,8 @@ enum ItemType {Seed, Mutator}
 export (ItemType) var item_type 
 
 var ItemTypeToSceneMap = 	{
-	ItemType.Seed:load("res://scenes//Items//Seed.tscn"), 
-	ItemType.Mutator:load("res://scenes//Items//Usable.tscn") 
+	ItemType.Seed:load("res://scenes/Items/Seed.tscn"), 
+	ItemType.Mutator:load("res://scenes/Items/Usable.tscn")
 	}
 
 func feedSeed(Monster, Attributes):

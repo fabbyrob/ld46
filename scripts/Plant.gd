@@ -1,6 +1,6 @@
 extends Node
 
-var SeedPreload = preload("res://scenes//JSeed.tscn")
+var SeedPreload = preload("res://scenes/JSeed.tscn")
 
 var rng = RandomNumberGenerator.new()
 
