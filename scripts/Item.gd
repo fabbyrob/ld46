@@ -1,7 +1,7 @@
 extends Node2D
 class_name Item
 
-export (ItemManager.ItemType) var item_type = ItemManager.ItemType.Seed
+var item_type = ItemManager.ItemType.Seed
 onready var originalScale = $Sprite.scale
 
 

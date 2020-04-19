@@ -15,9 +15,9 @@ _global_script_classes=[ {
 "path": "res://scripts/Field.gd"
 }, {
 "base": "Node",
-"class": "Frank",
+"class": "FieldAttributes",
 "language": "GDScript",
-"path": "res://scripts/ItemManager.gd"
+"path": "res://scripts/FieldAttributes.gd"
 }, {
 "base": "ItemSlot",
 "class": "InventorySlot",
@@ -41,7 +41,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Field": "",
-"Frank": "",
+"FieldAttributes": "",
 "InventorySlot": "",
 "Item": "",
 "ItemSlot": "",
@@ -58,6 +58,7 @@ config/icon="res://icon.png"
 
 Randomizer="*res://scripts/RNG.gd"
 ItemManager="*res://scripts/ItemManager.gd"
+fakeenum="*res://scripts/fakeenum.gd"
 
 [display]
 

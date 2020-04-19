@@ -1,5 +1,4 @@
 extends Node
-class_name Frank
 
 enum ItemType {Seed, Mutator}
 onready var RNG = get_node("/root/Randomizer")

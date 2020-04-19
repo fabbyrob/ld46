@@ -5,8 +5,7 @@ class_name Field
 #PREFABS
 var SeedScene = load("res://scenes/Items/Seed.tscn")
 
-#EXPORTS
-export(Fakeenum.NamedEnum) var x #= Fakeenum.NamedEnum.ONE
+#
 export(bool) var plantable = true
 export var mutation_modifier = 1.0
 
