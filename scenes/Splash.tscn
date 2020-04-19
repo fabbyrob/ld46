@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/art/splash/splash_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/splash/start2.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/art/splash/exit.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/splash/exit2.png" type="Texture" id=10]
 [ext_resource path="res://scripts/Splash.gd" type="Script" id=11]
+[ext_resource path="res://assets/art/splash/title.png" type="Texture" id=12]
 
 [node name="Background" type="TextureRect"]
 texture = ExtResource( 1 )
@@ -21,61 +22,70 @@ __meta__ = {
 
 [node name="Logo" type="TextureRect" parent="."]
 anchor_right = 0.591
-margin_left = 128.577
-margin_top = 37.6736
-margin_right = 923.393
-margin_bottom = 1087.67
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = 333.963
+margin_top = 217.343
+margin_right = -71.2209
+margin_bottom = 417.343
+rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartButton" type="TextureButton" parent="Logo"]
-margin_left = -178.378
-margin_top = 315.214
-margin_right = 361.622
-margin_bottom = 495.214
+[node name="StartButton" type="TextureButton" parent="."]
+margin_left = 39.388
+margin_top = 195.281
+margin_right = 579.388
+margin_bottom = 375.281
+rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CreditsButton" type="TextureButton" parent="Logo"]
-margin_left = 1199.77
-margin_top = 821.024
-margin_right = 1739.77
-margin_bottom = 1001.03
+[node name="CreditsButton" type="TextureButton" parent="."]
+margin_left = 728.462
+margin_top = 448.186
+margin_right = 1268.46
+margin_bottom = 628.192
+rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScoresButton" type="TextureButton" parent="Logo"]
+[node name="ScoresButton" type="TextureButton" parent="."]
 visible = false
-margin_left = 1202.21
-margin_top = 315.215
-margin_right = 1742.21
-margin_bottom = 495.215
+margin_left = 729.682
+margin_top = 195.281
+margin_right = 1269.68
+margin_bottom = 375.281
+rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" type="TextureButton" parent="Logo"]
-margin_left = -180.821
-margin_top = 803.92
-margin_right = 359.179
-margin_bottom = 983.92
+[node name="ExitButton" type="TextureButton" parent="."]
+margin_left = 38.1665
+margin_top = 439.634
+margin_right = 578.167
+margin_bottom = 619.634
+rect_scale = Vector2( 0.5, 0.5 )
 texture_normal = ExtResource( 9 )
 texture_pressed = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_down" from="Logo/StartButton" to="." method="_on_StartButton_button_down"]
-[connection signal="button_down" from="Logo/CreditsButton" to="." method="_on_CreditsButton_button_down"]
-[connection signal="button_down" from="Logo/ScoresButton" to="." method="_on_ScoresButton_button_down"]
-[connection signal="button_down" from="Logo/ExitButton" to="." method="_on_ExitButton_button_down"]
+
+[node name="title" type="Sprite" parent="."]
+position = Vector2( 699.956, 129.577 )
+scale = Vector2( 2.95728, 3.38329 )
+texture = ExtResource( 12 )
+[connection signal="button_down" from="StartButton" to="." method="_on_StartButton_button_down"]
+[connection signal="button_down" from="CreditsButton" to="." method="_on_CreditsButton_button_down"]
+[connection signal="button_down" from="ScoresButton" to="." method="_on_ScoresButton_button_down"]
+[connection signal="button_down" from="ExitButton" to="." method="_on_ExitButton_button_down"]

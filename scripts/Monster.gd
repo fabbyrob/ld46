@@ -79,8 +79,10 @@ func hunger_tick():
 		change = 0.125
 	elif score < 30:
 		change = 0.25
-	else:
+	elif score < 100:
 		change = 0.5
+	else:
+		change = 1.0
 	current_hunger = clamp(current_hunger + change, min_hunger, max_hunger)
 
 func spawn_item(node):
