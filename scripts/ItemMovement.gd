@@ -48,7 +48,7 @@ func click_drag_event(viewport, event, shape_idx):
 					for area in areas:
 						var _parent = area.get_parent()
 						if(area is Field):
-							emit_signal("DroppedField", _parent)
+							emit_signal("DroppedField", _parent, pickupSource)
 							foundNewArea = true
 							break
 						elif (area is InventorySlot):#we're dropping on an inventory slot
@@ -64,7 +64,7 @@ func click_drag_event(viewport, event, shape_idx):
 							#should check if i'm feedable
 							#feed the monster
 							var MonsterNode = area.get_parent()
-							emit_signal("DroppedMonster", MonsterNode)
+							emit_signal("DroppedMonster", MonsterNode, pickupSource)
 							foundNewArea = true
 						else:
 							#this area isn't valid
