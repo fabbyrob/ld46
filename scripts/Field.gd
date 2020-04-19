@@ -7,6 +7,7 @@ var SeedScene = load("res://scenes/Items/Seed.tscn")
 
 #EXPORTS
 export(bool) var plantable = true
+export var mutation_modifier = 1.0
 
 #MEMBERS
 var planted_attrs : PlantAttributes = null
@@ -42,10 +43,11 @@ func _on_Timer_timeout():
 	# add 4 plants to field area, with/without mutation
 	for i in range(4):
 		var grown_attrs = planted_attrs.duplicate()
-		grown_attrs.mutate()
 		#TODO create a plant item with these grown_attrs
 		var new_plant = SeedScene.instance()
 		new_plant.get_node("PlantAttributes").replace_by(grown_attrs)
+		get_tree().get_root().add_child(new_plant)
+		grown_attrs.mutate(mutation_modifier)
 		#new_plant.update_self() # TODO
 		#TODO add plant item to scene in one of the field slots
 		var plot = get_node("plot%d" % [i+1]) as ItemSlot

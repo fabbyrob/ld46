@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/art/farm_art/potato.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/farm_art/dirt.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/art/farm_art/exit.png" type="Texture" id=20]
 [ext_resource path="res://assets/art/splash/resume.png" type="Texture" id=21]
 [ext_resource path="res://scripts/ItemSlot.gd" type="Script" id=22]
+[ext_resource path="res://scripts/RNG.gd" type="Script" id=23]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 88.1877
@@ -36,6 +37,9 @@ height = 8.83669
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 17 )
 ResumeButton = NodePath("GUI/ResumeButton")
+
+[node name="Randomizer" type="Node2D" parent="."]
+script = ExtResource( 23 )
 
 [node name="Seed2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 166.173, 208.499 )
@@ -61,54 +65,42 @@ scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 8 )
 
 [node name="plot1" type="Area2D" parent="Field"]
-scale = Vector2( 1, 1 )
 script = ExtResource( 22 )
 
 [node name="plot1_sprite" type="Sprite" parent="Field/plot1"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="plot1_collision" type="CollisionPolygon2D" parent="Field/plot1"]
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="plot2" type="Area2D" parent="Field"]
 position = Vector2( 500, 0 )
-scale = Vector2( 1, 1 )
 script = ExtResource( 22 )
 
 [node name="plot2_sprite" type="Sprite" parent="Field/plot2"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="plot2_collision" type="CollisionPolygon2D" parent="Field/plot2"]
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="plot3" type="Area2D" parent="Field"]
 position = Vector2( 0, 500 )
-scale = Vector2( 1, 1 )
 script = ExtResource( 22 )
 
 [node name="plot3_sprite" type="Sprite" parent="Field/plot3"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="plot3_collision" type="CollisionPolygon2D" parent="Field/plot3"]
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="plot4" type="Area2D" parent="Field"]
 position = Vector2( 500, 500 )
-scale = Vector2( 1, 1 )
 script = ExtResource( 22 )
 
 [node name="plot4_sprite" type="Sprite" parent="Field/plot4"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 2 )
 
 [node name="plot4_collision" type="CollisionPolygon2D" parent="Field/plot4"]
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( 218, 212, -218, 212, -218, -212, 218, -212 )
 
 [node name="Timer" type="Timer" parent="Field"]
@@ -213,11 +205,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="plant" type="Sprite" parent="."]
-position = Vector2( 304.682, 96.4559 )
-scale = Vector2( 0.223743, 0.240755 )
-texture = ExtResource( 4 )
-
 [node name="Seed" parent="." instance=ExtResource( 5 )]
 position = Vector2( 158.004, 126.496 )
 scale = Vector2( 0.535, 1 )
@@ -266,6 +253,11 @@ shape = SubResource( 3 )
 
 [node name="Item" parent="." instance=ExtResource( 13 )]
 position = Vector2( 360.284, 396.401 )
+
+[node name="plant" type="Sprite" parent="."]
+position = Vector2( 304.682, 94.5559 )
+scale = Vector2( 0.223743, 0.240755 )
+texture = ExtResource( 4 )
 [connection signal="timeout" from="Monster/Timer" to="Monster" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Field/Timer" to="Field" method="_on_Timer_timeout"]
 [connection signal="button_down" from="GUI/HBoxContainer/Button" to="Monster" method="_on_Button_button_down"]
