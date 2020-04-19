@@ -68,6 +68,8 @@ ItemManager="*res://scripts/ItemManager.gd"
 [display]
 
 window/dpi/allow_hidpi=true
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [rendering]
 
