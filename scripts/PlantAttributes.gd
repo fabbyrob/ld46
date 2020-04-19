@@ -7,7 +7,7 @@ onready var RNG = get_node("/root/Randomizer")
 
 export(float,0,1,0.05) var mutation_rate = 0.9
 
-export(int,0,100,5) var food_amount = 15
+export(int,0,100,1) var food_amount = 15
 
 export(float,0,30,0.5) var growth_time = 5
 

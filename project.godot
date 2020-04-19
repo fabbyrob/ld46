@@ -64,7 +64,6 @@ config/icon="res://icon.png"
 
 Randomizer="*res://scripts/RNG.gd"
 ItemManager="*res://scripts/ItemManager.gd"
-fakeenum="*res://scripts/fakeenum.gd"
 
 [display]
 

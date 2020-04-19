@@ -8,6 +8,13 @@ var CurrentHP
 var RangeNode
 var TimerNode
 
+var min_hunger = 0
+var max_hunger = 10
+var hunger_change = 0
+var current_hunger = 0
+
+onready var tween = Tween.new()
+
 signal monster_death
 
 # Declare member variables here. Examples:
@@ -58,8 +65,23 @@ func _on_Button2_button_down():
 #every timer tick decreases HP
 #then restarts the timer
 func _on_HPTimer_timeout():
-	updateHP(HPdecay)
+	hunger_tick()
+	updateHP(-current_hunger)
 	TimerNode.start(TimerTick)
+
+func decrease_hunger(amount):
+	current_hunger = clamp(current_hunger - amount, min_hunger, max_hunger)
+
+func hunger_tick():
+	var score = get_tree().get_root().get_node("MainScene/ScoreManager").time_alive
+	var change
+	if score < 10:
+		change = 0.125
+	elif score < 30:
+		change = 0.25
+	else:
+		change = 0.5
+	current_hunger = clamp(current_hunger + change, min_hunger, max_hunger)
 
 func spawn_item(node):
 	var slot = get_node("InvSlot")

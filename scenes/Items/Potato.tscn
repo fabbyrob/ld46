@@ -26,6 +26,8 @@ texture = ExtResource( 2 )
 [node name="PlantAttributes" type="Node2D" parent="."]
 position = Vector2( -300, -36.345 )
 script = ExtResource( 3 )
+food_amount = 7
+growth_time = 8.0
 
 [node name="DraggedThing" type="Area2D" parent="."]
 script = ExtResource( 5 )
