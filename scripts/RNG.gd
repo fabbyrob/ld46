@@ -25,5 +25,8 @@ func sample_normal(mean, sd):
 func sample_normal_frac(mean, sd):
 	return clamp(rng.randfn(mean, sd), 0.0, 1.0)
 	
-func sample_enum(my_enum):
-	return my_enum.values()[rng.randi()%my_enum.size()]
+func sample_enum(my_enum, ignore):
+	var val =  my_enum.values()[rng.randi()%my_enum.size()]
+	if val == ignore:
+		val = (val + 1) % my_enum.size()
+	return val

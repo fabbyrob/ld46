@@ -2,7 +2,7 @@ extends Node2D
 class_name Plant
 
 onready var originalScale = $Sprite.scale
-var item_type = ItemManager.ItemType.Mutator
+var item_type = ItemManager.ItemType.Seed
 
 func feed(Monster):
 		Monster.updateHP($PlantAttributes.food_amount)
@@ -30,7 +30,7 @@ func _on_DraggedThing_DroppedField(Field, OldSlot):
 	if (OldSlot):
 		OldSlot.set_item(null)
 	var attr = $PlantAttributes
-	var planted = Field.plant(attr)
+	var planted = Field.plant(self)
 	if (planted == true):
 		get_parent().remove_child(self)
 		self.queue_free()

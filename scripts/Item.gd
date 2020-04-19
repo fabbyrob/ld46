@@ -7,7 +7,13 @@ onready var originalScale = $Sprite.scale
 
 func feed(Monster):
 	Monster.updateHP(-10)
-	spawn(ItemManager.ItemType.Mutator, Monster)
+	var val = Randomizer.sample()
+	if (val < 0.1):
+		spawn(ItemManager.ItemType.Cucumber, Monster)
+	elif (val < 0.6):
+		spawn(ItemManager.ItemType.Mutator, Monster)
+		
+	
 		
 func apply_to_field(Field):
 	if (Field.is_growing()):
@@ -17,7 +23,7 @@ func apply_to_field(Field):
 		return true
 	
 func _to_string():
-	return "Causes plants to grow weird, and monsters to do weird stuff."
+	return ItemManager.ItemTypeToDescriptionMap[item_type]
 	
 # Declare member variables here. Examples:
 # var a = 2

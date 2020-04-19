@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/art/monster/e001a_02walk.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Monster.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/attack of the cucumbers.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://scripts/TimerUI.gd" type="Script" id=4]
 [ext_resource path="res://scenes/UI/InventorySlot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/art/monster/e001a_18down.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 69.8031
@@ -93,8 +94,13 @@ position = Vector2( 128.834, 69.7931 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "MonsterIdle"
 anims/MonsterIdle = SubResource( 3 )
-[connection signal="monster_death" from="." to="PokeNotification" method="_on_Monster_monster_death"]
+
+[node name="DeadSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( -6.30634, -12.4874 )
+texture = ExtResource( 6 )
 [connection signal="monster_death" from="." to="SpawnNotification" method="_on_Monster_monster_death"]
+[connection signal="monster_death" from="." to="PokeNotification" method="_on_Monster_monster_death"]
 [connection signal="timeout" from="HPTimer" to="." method="_on_HPTimer_timeout"]
 [connection signal="input_event" from="Mouth" to="." method="_on_Mouth_input_event"]
 [connection signal="timeout" from="SpawnNotification/NotificationTimer" to="SpawnNotification" method="_on_Timer_timeout"]

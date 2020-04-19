@@ -14,8 +14,10 @@ var planted_attrs = null
 
 #METHODS
 
-func plant(attributes):
+func plant(node):
+	var attributes = node.get_node("PlantAttributes")
 	#generate a new seed with mutated attributes
+	SeedScene = ItemManager.ItemTypeToSceneMap[node.item_type]
 	if (plantable):
 		#delete any existing plants
 		for i in range(1, 5):

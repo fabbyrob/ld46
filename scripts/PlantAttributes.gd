@@ -2,11 +2,6 @@ extends Node2D
 
 class_name PlantAttributes
 #TYPES
-enum PlantType {Potato, Cucumber, Turnip}
-
-#EXPORTS
-export(PlantType) var plant_type = PlantType.Potato
-var PlantTypeMap = {PlantType.Potato:"Potato", PlantType.Cucumber:"Cucumber", PlantType.Turnip:"Turnip"}
 
 onready var RNG = get_node("/root/Randomizer")
 
@@ -38,10 +33,11 @@ func mutate(field_attrs):
 	print(_to_string())
 
 func _to_string():
-	return ("T:%s m:%.2f f:%0.2f g:%0.2f c:%s" % [PlantTypeMap[plant_type], mutation_rate, food_amount, growth_time, color])
+	return ("T:%s m:%.2f f:%0.2f g:%0.2f c:%s" % [ItemManager.ItemTypeToNameMap[get_parent().item_type], mutation_rate, food_amount, growth_time, color])
 
 func make_tooltip():
-	return ("%s\nFood Amt: %.2f\nGrowth Time: %.2f\nMutation Rate: %.2f" % [PlantTypeMap[plant_type], food_amount, growth_time, mutation_rate])
+	return ("%s\nFood Amt: %.2f\nGrowth Time: %.2f\nMutation Rate: %.2f\n%s" % 
+	[ItemManager.ItemTypeToNameMap[get_parent().item_type], food_amount, growth_time, mutation_rate,ItemManager.ItemTypeToDescriptionMap[get_parent().item_type]])
 	
 
 func get_size():
