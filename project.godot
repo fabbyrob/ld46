@@ -52,6 +52,10 @@ config/icon="res://icon.png"
 
 Randomizer="*res://scripts/RNG.gd"
 
+[display]
+
+window/dpi/allow_hidpi=true
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

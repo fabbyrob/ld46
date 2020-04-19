@@ -39,6 +39,12 @@ func mutate(mutation_modifier):
 func _to_string():
 	return ("T:%s m:%.2f f:%0.2f g:%0.2f c:%s" % [PlantTypeMap[plant_type], mutation_rate, food_amount, growth_time, color])
 
+func make_tooltip():
+	return ("%s\nFood Amt: %.2f\nGrowth Time: %.2f\nMutation Rate: %.2f" % [PlantTypeMap[plant_type], food_amount, growth_time, mutation_rate])
+	
+
+func get_size():
+	return clamp(food_amount/20, 0.5, 1.0)
 
 func _on_Button_button_down():
 	mutate(1.0)

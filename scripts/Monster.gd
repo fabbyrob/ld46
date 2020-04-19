@@ -40,6 +40,7 @@ func _process(delta):
 
 func updateHP(val):
 	CurrentHP += val
+	CurrentHP = clamp(CurrentHP, 0, MaxHP)
 	if (CurrentHP == 0):
 		Death()
 

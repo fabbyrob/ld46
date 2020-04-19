@@ -25,8 +25,15 @@ script = ExtResource( 2 )
 visible = false
 position = Vector2( 0.431824, 4.66264 )
 shape = SubResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="DroppedField" from="DraggedThing" to="." method="_on_DraggedThing_DroppedField"]
 [connection signal="DroppedInventory" from="DraggedThing" to="." method="_on_DraggedThing_DroppedInventory"]
 [connection signal="DroppedMonster" from="DraggedThing" to="." method="_on_DraggedThing_DroppedMonster"]
 [connection signal="DroppedTrash" from="DraggedThing" to="." method="_on_DraggedThing_DroppedTrash"]
-[connection signal="input_event" from="DraggedThing" to="DraggedThing" method="click_drag_event"]
+[connection signal="gui_input" from="Control" to="DraggedThing" method="_on_Control_gui_input"]

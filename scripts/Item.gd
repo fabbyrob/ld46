@@ -3,6 +3,7 @@ class_name Item
 
 enum ItemType {Seed, Mutator}
 export (ItemType) var item_type 
+onready var originalScale = $Sprite.scale
 
 var ItemTypeToSceneMap = 	{
 	ItemType.Seed:load("res://scenes/Items/Seed.tscn"), 
@@ -15,7 +16,13 @@ func feedSeed(Monster, Attributes):
 func feedMutator(Monster):
 		Monster.updateHP(-5)
 		spawn(ItemType.Mutator, Monster)
-
+		
+func _to_string():
+	match(item_type):
+		ItemType.Seed: return $PlantAttributes.make_tooltip()
+		ItemType.Mutator: return "Mutator thing string"
+	return ""
+	
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -24,12 +31,17 @@ func feedMutator(Monster):
 func update_self():
 	if($PlantAttributes):
 		get_node("Sprite").modulate = $PlantAttributes.color
+		var new_scale = Vector2($PlantAttributes.get_size(), $PlantAttributes.get_size())
+		$Sprite.scale = originalScale*new_scale
+		
+	get_node("Control").set_tooltip(_to_string())
 		#mayeb scale should be an attribute
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#item_type = ItemType.Seed
+	update_self()#just in case
 	pass # Replace with function body.
 
 func spawn(item_type, monster):

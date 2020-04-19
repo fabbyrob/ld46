@@ -89,3 +89,13 @@ func getOtherItem(areasList):
 			return area
 	return null
 
+
+
+func _on_Control_gui_input(event):
+	click_drag_event(null, event, null)
+	pass # Replace with function body.
+
+
+func _on_DraggedThing_input_event(viewport, event, shape_idx):
+	click_drag_event(viewport, event, shape_idx)
+	pass # Replace with function body.

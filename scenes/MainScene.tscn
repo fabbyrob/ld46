@@ -18,7 +18,7 @@
 [ext_resource path="res://assets/art/splash/resume.png" type="Texture" id=21]
 [ext_resource path="res://scripts/RNG.gd" type="Script" id=23]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 18.732
 height = 8.83669
 
@@ -168,7 +168,7 @@ texture = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trash"]
 position = Vector2( -2.08768, -2.08768 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Item" parent="." instance=ExtResource( 13 )]
 position = Vector2( 48.6687, 288.557 )
