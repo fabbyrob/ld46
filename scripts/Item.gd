@@ -10,6 +10,7 @@ func feedSeed(Monster, Attributes):
 		
 func feedMutator(Monster):
 		Monster.updateHP(-5)
+		spawn(ItemType.Mutator, Monster)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -21,6 +22,11 @@ func feedMutator(Monster):
 func _ready():
 	#item_type = ItemType.Seed
 	pass # Replace with function body.
+
+func spawn(item_type, monster):
+	var spawn_point = monster.get_node("SpawnPoint")
+	
+	pass
 
 func position_in_slot(Slot):
 	position = Slot.position + Slot.get_parent().position
