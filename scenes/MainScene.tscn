@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/art/farm_art/background.png" type="Texture" id=8]
 [ext_resource path="res://assets/art/farm_art/plus.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/farm_art/minus.png" type="Texture" id=10]
-[ext_resource path="res://scenes/InventoryManager.gd" type="Script" id=11]
+[ext_resource path="res://scripts/InventoryManager.gd" type="Script" id=11]
 [ext_resource path="res://assets/art/farm_art/trash.png" type="Texture" id=12]
 [ext_resource path="res://scenes/Items/Usable.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scripts/ScoreManager.gd" type="Script" id=14]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/art/farm_art/exit.png" type="Texture" id=20]
 [ext_resource path="res://assets/art/splash/resume.png" type="Texture" id=21]
 [ext_resource path="res://scripts/RNG.gd" type="Script" id=23]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 4 )
