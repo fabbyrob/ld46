@@ -1,3 +1,4 @@
 .import/
 scenes/MainScene_testing.tscn
 export_presets.cfg
+scenes/TestScene.tscn
