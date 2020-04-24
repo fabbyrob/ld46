@@ -15,6 +15,10 @@ var planted_attrs = null
 #METHODS
 
 func plant(node):
+	
+	if (not node.has_node("PlantAttributes")):
+		return false
+		
 	var attributes = node.get_node("PlantAttributes")
 	#generate a new seed with mutated attributes
 	SeedScene = ItemManager.ItemTypeToSceneMap[node.item_type]
