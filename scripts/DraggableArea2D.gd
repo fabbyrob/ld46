@@ -24,8 +24,8 @@ func _ready():
 		target = get_node(node_to_move)
 		
 	# connect to input event signals
-	.connect("input_event", self, "_on_input_event")
-	.connect("mouse_exited", self, "_on_mouse_exited")
+	connect("input_event", self, "_on_input_event")
+	connect("mouse_exited", self, "_on_mouse_exited")
 
 # the only thing we should do here is check if mouse is still pressed
 # this way, if the mouse is released in a way where the event
