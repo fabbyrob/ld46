@@ -2,7 +2,7 @@ extends Area2D
 class_name DraggableArea2D
 
 # EXPORTS
-export(NodePath) var node_to_move 
+export(NodePath) var node_to_move = ".."
 export(bool) var keep_offset = true
 export(bool) var drop_in_multiple = false
 
