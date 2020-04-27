@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "DraggableArea2D",
 "language": "GDScript",
-"path": "res://scripts/DraggableArea2D.gd"
+"path": "res://scripts/general/DraggableArea2D.gd"
 }, {
 "base": "Node",
 "class": "Field",
