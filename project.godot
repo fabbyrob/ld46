@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "PlantAttributes",
 "language": "GDScript",
 "path": "res://scripts/PlantAttributes.gd"
+}, {
+"base": "RichTextLabel",
+"class": "RichToastLabel",
+"language": "GDScript",
+"path": "res://scripts/general/RichToastLabel.gd"
 } ]
 _global_script_class_icons={
 "DraggableArea2D": "",
@@ -57,7 +62,8 @@ _global_script_class_icons={
 "Item": "",
 "ItemSlot": "",
 "Plant": "",
-"PlantAttributes": ""
+"PlantAttributes": "",
+"RichToastLabel": ""
 }
 
 [application]
